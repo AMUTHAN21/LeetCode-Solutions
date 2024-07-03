@@ -26,8 +26,6 @@ class Solution
             graph.get(a).add(new NodeProbability(b, prob));
             graph.get(b).add(new NodeProbability(a, prob));
         }
-
-        // Step 2: BFS setup
         Queue<NodeProbability> queue = new LinkedList<>();
         double[] probabilities = new double[n];
         probabilities[start_node] = 1.0;
@@ -41,7 +39,6 @@ class Solution
             for (NodeProbability neighbor : graph.get(node)) 
             {
                 double newProb = prob * neighbor.probability;
-                // Only consider this new path if it improves the probability
                 if (newProb > probabilities[neighbor.node]) 
                 {
                     probabilities[neighbor.node] = newProb;
@@ -49,8 +46,6 @@ class Solution
                 }
             }
         }
-
-        // Return the maximum probability to reach the end node
         return probabilities[end_node];
     }
 }
